@@ -46,6 +46,56 @@ public class HelloController {
         return html;
     }
 
+    @GetMapping("languageform")
+    public String languageForm() {
+        String html =
+                "<html> " +
+                        "<body>" +
+                        "<form method = 'get'>" +
+                        "<input type = 'text' name = 'name' />" +
+                            "<select name = 'language'>" +
+                            "<option value = 'english'>English</option>" +
+                            "<option value = 'french'>French</option>" +
+                            "<option value = 'italian'>Italian</option>" +
+                            "<option value = 'spanish'>Spanish</option>" +
+                            "<option value = 'german'>German</option>" +
+                        "<input type = 'submit' value = 'Greet Me!' />" +
+                        "</form>" +
+                        "</body>" +
+                        "</html>";
+        return html;
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String helloPost(@RequestParam String name, @RequestParam String language) {
+        if (name == null) {
+            name = "world";
+        }
+        return createMessage(name,language);
+    }
+
+    public static String createMessage(String n, String l){
+        String greeting = "";
+
+        if (l.equals("english")) {
+            greeting = "Hello";
+        }
+        else if (l.equals("french")) {
+            greeting = "Bonjour";
+        }
+        else if (l.equals("italian")) {
+            greeting = "Bonjourno";
+        }
+        else if (l.equals("spanish")) {
+            greeting = "Hola";
+        }
+        else if (l.equals("german")) {
+            greeting = "Hallo";
+        }
+        return greeting + " " + n;
+    }
+
+
 
 
 }
