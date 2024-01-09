@@ -20,38 +20,38 @@ public class HelloController {
         return "Goodbye, Spring";
     }
 
-    //Handles requests of the form /hello?name=LaunchCode
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
-    public String helloWithQueryParam(@RequestParam String name) {
-        return "Hello, " + name + "!";
-    }
+//    //Handles requests of the form /hello?name=LaunchCode
+//    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
+//    public String helloWithQueryParam(@RequestParam String name) {
+//        return "Hello, " + name + "!";
+//    }
+//
+//    //Handles requests of the form /hello/LaunchCode
+//    @GetMapping("{name}")
+//    public String helloWithPathParam(@PathVariable String name){
+//        return "Hello " + name + "!";
+//    }
 
-    //Handles requests of the form /hello/LaunchCode
-    @GetMapping("{name}")
-    public String helloWithPathParam(@PathVariable String name){
-        return "Hello " + name + "!";
-    }
-
-    @GetMapping("form")
-    public String helloForm() {
-        String html =
-                "<html>" +
-                        "<body>" +
-                        "<form method = 'post' action = '/hello'>" +
-                        "<input type = 'text' name = 'name' />" +
-                        "<input type = 'submit' value = 'Greet Me!' />" +
-                        "</form>" +
-                        "</body>" +
-                        "</html>";
-        return html;
-    }
+//    @GetMapping("form")
+//    public String helloForm() {
+//        String html =
+//                "<html>" +
+//                        "<body>" +
+//                        "<form method = 'post' action = '/hello'>" +
+//                        "<input type = 'text' name = 'name' />" +
+//                        "<input type = 'submit' value = 'Greet Me!' />" +
+//                        "</form>" +
+//                        "</body>" +
+//                        "</html>";
+//        return html;
+//    }
 
     @GetMapping("languageform")
     public String languageForm() {
         String html =
                 "<html> " +
                         "<body>" +
-                        "<form method = 'get'>" +
+                        "<form method = 'get' action = 'hello'>" +
                         "<input type = 'text' name = 'name' />" +
                             "<select name = 'language'>" +
                             "<option value = 'english'>English</option>" +
@@ -66,7 +66,8 @@ public class HelloController {
         return html;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    //handle requests of the form /hello/languageform
+    @RequestMapping(method = RequestMethod.GET)
     public String helloPost(@RequestParam String name, @RequestParam String language) {
         if (name == null) {
             name = "world";
